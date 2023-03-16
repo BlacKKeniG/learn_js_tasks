@@ -1,0 +1,36 @@
+<!--
+  Дочерние элементы в DOM
+  
+  Напишите код, как получить…
+  
+  элемент <div>?
+  <ul>?
+  второй <li> (с именем Пит)?
+    
+    Для страницы:
+  -->
+
+<html>
+<body>
+  <div>Пользователи:</div>
+  <ul>
+    <li>Джон</li>
+    <li>Пит</li>
+  </ul>
+
+  <script>
+    'use strict'
+      let divElem = document.body.firstElementChild;
+      console.log(divElem);
+      
+      let ulElem = document.body.children[1];
+      console.log(ulElem);
+      
+      let liPete = ulElem.lastElementChild;
+      console.log(liPete);
+
+  </script>
+
+
+</body>
+</html>

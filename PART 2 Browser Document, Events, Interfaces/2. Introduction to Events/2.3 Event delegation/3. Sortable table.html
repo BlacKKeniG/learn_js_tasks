@@ -1,0 +1,105 @@
+<!--
+    Сортируемая таблица
+важность: 4
+Сделать таблицу сортируемой: при клике на элемент <th> строки таблицы должны
+сортироваться по соответствующему столбцу.
+
+Каждый элемент <th> имеет атрибут data-type:
+В примере первый столбец содержит числа, а второй – строки. 
+Функция сортировки должна это учитывать, ведь числа сортируются иначе, чем строки.
+
+Сортировка должна поддерживать только типы "string" и "number".
+
+Работающий пример:
+
+Возраст	Имя
+5	Вася
+2	Петя
+12	Женя
+9	Маша
+1	Илья
+
+P.S. Таблица может быть большой, с любым числом строк и столбцов.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+<body>
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    grid.addEventListener('click', event => {
+      let target = event.target;
+      if (target.tagName !== 'TH') return;
+
+      const tbody = grid.querySelector('tbody');
+      const rows = Array.from(tbody.rows);
+      const col = target.cellIndex;
+
+      rows.sort((rowA, rowB) => {
+        const cellA = rowA.cells[col].textContent;
+        const cellB = rowB.cells[col].textContent;
+    
+        if (+cellA) { 
+          return cellA - cellB; 
+        }
+        else { 
+          return cellA.localeCompare(cellB, ['ru', 'en']);
+        }
+      });
+
+      tbody.append(...rows);
+    });
+  </script>
+</body>
+</html>

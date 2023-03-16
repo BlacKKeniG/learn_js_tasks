@@ -1,0 +1,16 @@
+.notification {
+    position: fixed;
+    z-index: 100;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+    background: rgb(206, 193, 193);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .welcome {
+    background: #b80000;
+    color: yellow;
+  }

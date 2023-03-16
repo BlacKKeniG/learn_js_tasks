@@ -1,0 +1,40 @@
+<!--
+    Добавьте пункт к выпадающему списку
+Имеется <select>:
+
+Используя JavaScript:
+1. Выведите значение и текст выбранного пункта.
+2. Добавьте пункт: <option value="classic">Классика</option>.
+3. Сделайте его выбранным.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="genres">
+        <option value="rock">Рок</option>
+        <option value="blues" selected>Блюз</option>
+      </select>
+    
+      <span id="task_1"></span>
+      <script>
+				//1
+        let selectedOption = genres.options[genres.selectedIndex];
+				task_1.textContent = `Value: ${selectedOption.value}, text: ${selectedOption.text}`;
+
+				//2
+				let classicOption = new Option('Классика', 'classic');
+				genres.append(classicOption);
+				
+				//3
+				classicOption.selected = true;
+				</script>
+				
+</body>
+</html>

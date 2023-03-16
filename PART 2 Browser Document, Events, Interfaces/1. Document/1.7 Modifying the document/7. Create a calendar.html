@@ -1,0 +1,60 @@
+<!--
+    Создайте календарь в виде таблицы
+
+Напишите функцию createCalendar(elem, year, month).
+
+Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
+
+Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, первым днём недели должен быть понедельник.
+
+Например, createCalendar(cal, 2012, 9) сгенерирует в cal следующий календарь:
+
+
+P.S. В этой задаче достаточно сгенерировать календарь, кликабельным его делать не нужно.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="calendar"></div>
+
+    <script>
+        function createCalendar(elem, year, month) {
+            let mon = month - 1;
+            let date = new Date(year, mon);
+            let calendar = '';
+            let weekDays = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+            
+            let calendarCap = `<tr>${weekDays.map(item => `<th> ${item} </th>`).join('')}</tr>`;
+            let calendarBody = '<tr>';
+            let spaces = date.getDay() === 0 ? 7 : date.getDay();
+            
+            while (spaces > 1) {
+                calendarBody += '<td></td>';
+                spaces--;
+            }
+
+      for (let i = 1; mon === date.getMonth(); date.setDate(++i)) {
+
+            if (date.getDay() === 1) calendarBody += '<tr>';
+
+            calendarBody += `<td> ${i} </td>`;
+
+            if (date.getDay() === 0) calendarBody += '</tr>';
+      }
+
+      calendar =`<table> ${calendar + calendarCap + calendarBody} </table>`;
+      elem.innerHTML = calendar;
+    }
+    
+        createCalendar(document.querySelector('.calendar'), 2023, 3);
+      </script>
+</body>
+</html>

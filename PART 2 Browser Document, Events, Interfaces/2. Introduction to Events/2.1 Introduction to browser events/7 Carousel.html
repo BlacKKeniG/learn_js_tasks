@@ -1,0 +1,148 @@
+<!--
+    Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel{
+            background: #ddd;
+            width: 468px;
+            height: 152px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .display {
+            width: 390px;
+            height: 130px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tape {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            transition: all 0.6s;
+        }
+
+        .arrow {
+            padding: 0;
+            background: #ddd;
+            border-radius: 15px;
+            border: 1px solid gray;
+            font-size: 24px;
+            line-height: 24px;
+            color: #444;
+            display: block;
+        }
+
+        arrow:focus {
+            outline: none;
+        }
+
+        arrow:hover {
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        ul {
+            height: 130px;
+            width: 9999px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+        }
+
+        ul img {
+            width: 130px;
+            height: 130px;
+            display: block; /* убираем пустое место вокруг картинок */
+        }
+
+        ul li {
+            display: inline-block; /* убираем пустое место между элементами списка */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- создайте свою разметку со стилями -->
+  
+    
+    <div class="carousel">
+        <button class="arrow prev">⇦</button>
+        <div class="display">
+            <ul class="tape">
+                <li><img src="https://ru.js.cx/carousel/1.png"></li>
+                <li><img src="https://ru.js.cx/carousel/2.png"></li>
+                <li><img src="https://ru.js.cx/carousel/3.png"></li>
+                <li><img src="https://ru.js.cx/carousel/4.png"></li>
+                <li><img src="https://ru.js.cx/carousel/5.png"></li>
+                <li><img src="https://ru.js.cx/carousel/6.png"></li>
+                <li><img src="https://ru.js.cx/carousel/7.png"></li>
+                <li><img src="https://ru.js.cx/carousel/8.png"></li>
+                <li><img src="https://ru.js.cx/carousel/9.png"></li>
+                <li><img src="https://ru.js.cx/carousel/10.png"></li>
+            </ul>
+        </div>
+        <button class="arrow next">⇨</button>
+    </div>
+    
+  
+    <script>
+      // отметить картинки для удобства разработки
+      // этот код может быть удалён по вашему усмотрению
+      let i = 1;
+      for(let li of document.querySelectorAll('li')) {
+        li.style.position = 'relative';
+        li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+        i++;
+      }
+  
+      
+      function carouselManadger(){
+        const carousel = document.querySelector(".carousel");
+        const tape = carousel.querySelector(".tape");
+        const imeges = carousel.querySelectorAll("img");
+        
+        let imgWidth = 130;
+        let numImgInSlide = 3;
+        let slideWidth = imgWidth * numImgInSlide;
+        let offset = 0;
+        let tapeWidth = imeges.length * imgWidth;
+        tape.style.width = tapeWidth + 'px';
+        
+        carousel.addEventListener("click", event => {
+            target = event.target;
+
+            if(target.classList.contains('next')) {
+                offset += slideWidth;
+                if(tapeWidth - offset <= slideWidth){
+                    offset = tapeWidth - slideWidth;
+                }
+            }
+            if(target.classList.contains('prev')) {
+                offset -= slideWidth;
+                if(offset <= 0){
+                    offset = 0;
+                }
+            }
+            tape.style.transform = `translateX(${-offset}px)`;
+        });
+    }
+    carouselManadger();
+
+    </script>
+  
+  </body>
+</html>

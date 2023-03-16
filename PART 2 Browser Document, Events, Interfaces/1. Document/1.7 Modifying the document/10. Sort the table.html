@@ -1,0 +1,51 @@
+<!--
+    Сортировка таблицы
+    Напишите код для сортировки по столбцу "name"
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th><th>Surname</th><th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td><td>Smith</td><td>10</td>
+            </tr>
+            <tr>
+                <td>Pete</td><td>Brown</td><td>15</td>
+            </tr>
+            <tr>
+                <td>Ann</td><td>Lee</td><td>5</td>
+            </tr>
+            <tr>
+                <td>...</td><td>...</td><td>...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let tabelBody = document.querySelector("tbody")
+        console.log(tabelBody);
+        
+        sortArr = Array.from(tabelBody.rows).sort((rowA, rowB) =>
+            rowA.cells[0].textContent > rowB.cells[0].textContent  ? 1 : -1
+        );
+        
+        console.log(sortArr);
+
+        tabelBody.append(...sortArr);
+
+    </script>
+</body>
+</html>
